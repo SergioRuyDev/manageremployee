@@ -3,6 +3,8 @@ package com.sergioruy.manageremployee.service;
 import com.sergioruy.manageremployee.exception.UserNotFoundException;
 import com.sergioruy.manageremployee.model.Employee;
 import com.sergioruy.manageremployee.repository.EmployeeRepository;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +14,9 @@ import java.util.UUID;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
-
-    @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
 
     public Employee addEmployee(Employee employee) {
         employee.setEmployeeCode(UUID.randomUUID().toString());

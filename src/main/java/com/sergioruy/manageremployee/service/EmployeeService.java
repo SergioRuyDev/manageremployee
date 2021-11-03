@@ -4,6 +4,8 @@ import com.sergioruy.manageremployee.exception.UserNotFoundException;
 import com.sergioruy.manageremployee.model.Employee;
 import com.sergioruy.manageremployee.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -35,6 +37,11 @@ public class EmployeeService {
     }
 
     public void deleteEmployee(Long id) {
-        employeeRepository.deleteEmployeeById(id);
+        try {
+            employeeRepository.deleteById(id);
+
+        } catch (EmptyResultDataAccessException e) {
+            throw new UserNotFoundException(id);
+        }
     }
 }

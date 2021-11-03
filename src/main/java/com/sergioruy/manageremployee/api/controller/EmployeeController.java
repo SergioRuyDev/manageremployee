@@ -1,4 +1,4 @@
-package com.sergioruy.manageremployee.controller;
+package com.sergioruy.manageremployee.api.controller;
 
 import com.sergioruy.manageremployee.model.Employee;
 import com.sergioruy.manageremployee.service.EmployeeService;
@@ -43,8 +43,8 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteEmployee(@PathVariable("id") Long id) {
         employeeService.deleteEmployee(id);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

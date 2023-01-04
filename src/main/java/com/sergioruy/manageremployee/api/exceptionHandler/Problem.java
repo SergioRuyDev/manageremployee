@@ -1,5 +1,6 @@
 package com.sergioruy.manageremployee.api.exceptionHandler;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,6 +14,7 @@ import java.util.List;
 public class Problem {
 
     private Integer status;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy hh:mm:ss")
     private LocalDateTime timestamp;
     private String type;
     private String title;

@@ -10,9 +10,9 @@ public interface EmployeeService {
 
     Page<EmployeeDto> getAllEmployeesPaginated(Pageable pageable);
     List<EmployeeDto> getAllEmployees();
-    EmployeeDto getEmployeeId(Long employeeId);
+    EmployeeDto getEmployeeByCode(String employeeCode);
     EmployeeDto createEmployee(EmployeeDto employee);
-    EmployeeDto updateEmployee(EmployeeDto employee);
-    void deleteEmployee(Long employeeId);
+    EmployeeDto updateEmployee(String employeeCode, EmployeeDto employee);
+    void deleteByEmployeeCode(String employeeCode);
 
 }

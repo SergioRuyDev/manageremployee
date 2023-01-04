@@ -54,7 +54,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/{code}")
-    public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable("code")String employeeCode,
+    public ResponseEntity<EmployeeDto> updateEmployeeByUuid(@PathVariable("code")String employeeCode,
                                                       @RequestBody @Valid EmployeeDto employee) {
         EmployeeDto updateEmployee = employeeServiceImpl.updateEmployee(employeeCode, employee);
         return ResponseEntity.ok(updateEmployee);

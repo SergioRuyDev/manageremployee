@@ -1,7 +1,8 @@
-package com.sergioruy.manageremployee.controller;
+package com.sergioruy.manageremployee.api.controller;
 
 import com.sergioruy.manageremployee.model.Employee;
 import com.sergioruy.manageremployee.service.EmployeeService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,13 +11,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/employees")
+@AllArgsConstructor
+@CrossOrigin(origins = "*")
 public class EmployeeController {
 
     private final EmployeeService employeeService;
 
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
-    }
 
     @GetMapping("/all")
     public ResponseEntity<List<Employee>> getAllEmployees() {
@@ -43,8 +43,8 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteEmployee(@PathVariable("id") Long id) {
         employeeService.deleteEmployee(id);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

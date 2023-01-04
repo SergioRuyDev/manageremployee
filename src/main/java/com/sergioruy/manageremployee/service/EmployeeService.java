@@ -3,7 +3,9 @@ package com.sergioruy.manageremployee.service;
 import com.sergioruy.manageremployee.exception.UserNotFoundException;
 import com.sergioruy.manageremployee.model.Employee;
 import com.sergioruy.manageremployee.repository.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -12,13 +14,10 @@ import java.util.UUID;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class EmployeeService {
-    private final EmployeeRepository employeeRepository;
 
-    @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
+    private final EmployeeRepository employeeRepository;
 
     public Employee addEmployee(Employee employee) {
         employee.setEmployeeCode(UUID.randomUUID().toString());
@@ -39,6 +38,11 @@ public class EmployeeService {
     }
 
     public void deleteEmployee(Long id) {
-        employeeRepository.deleteEmployeeById(id);
+        try {
+            employeeRepository.deleteById(id);
+
+        } catch (EmptyResultDataAccessException e) {
+            throw new UserNotFoundException(id);
+        }
     }
 }

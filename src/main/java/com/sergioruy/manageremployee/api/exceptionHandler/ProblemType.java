@@ -7,7 +7,8 @@ public enum ProblemType {
 
     RESOURCE_NOT_FOUND("/resource-not-found", "Resource not found"),
     EMPLOYEE_EMAIL_EXIST("/employee-email-exist", "Employee email exist" ),
-    INTERNAL_SERVER_ERROR("/internal-server-error", "Internal Server Error");
+    INTERNAL_SERVER_ERROR("/internal-server-error", "Internal Server Error"),
+    BAD_REQUEST("/bad-request", "Bad Request");
 
     private String title;
     private String uri;
